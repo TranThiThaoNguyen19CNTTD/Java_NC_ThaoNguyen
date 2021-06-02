@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+
+<style>
+.redtext {
+	color: rgb(176, 206, 179);
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/list_users">Quản lý User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/ttuser">Thông tin User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/todo">Todo</a></li>
+					<li class="nav-item">
+						<form th:action="@{/logout}" method="post">
+							<input class="btn btn-link text-decoration-none text-dark"
+								type="submit" value="Đăng xuất" />
+						</form>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<table bgcolor="rgb(255, 211, 217)" width="100%">
+		<tr>
+			<td>@@</td>
+		</tr>
+	</table>
+	<div class="container text-center">
+		<div>
+			<form th:action="@{/logout}" method="post">
+				<p>
+				<h1 class="redtext">
+					^^<b>[[${#request.userPrincipal.principal.fullName}]]</b>^^
+				</h1>
+
+				<p>
+					<font face="Courier New" color="rgb(204, 121, 17)">-------------------------------------------</font>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div align="center">
+		<h1>Thêm Todo</h1>
+		<br />
+		<form action="#" th:action="@{/save}" th:object="${todo}"
+			method="post">
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>User_ID:</td>
+					<td><input type="text" th:field="*{user.id}" value="*{user.id}" /></td>
+				</tr>
+				<tr>
+					<td>Tiêu đề:</td>
+					<td><input type="text" th:field="*{tieude}" /></td>
+				</tr>
+				<tr>
+					<td>Nội dung:</td>
+					<td><input type="text" th:field="*{noidung}" /></td>
+				</tr>
+				<tr>
+					<td>Ngày tạo:</td>
+					<td><input type="text" th:field="*{ngaytao}" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Save</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

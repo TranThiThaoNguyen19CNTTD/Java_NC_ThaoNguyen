@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+
+<style>
+.redtext {
+	color: rgb(255, 128, 128);
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/list_users">Quản lý User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/ttuser">Thông tin User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/todo">Todo</a></li>
+					<li class="nav-item">
+						<form th:action="@{/logout}" method="post">
+							<input class="btn btn-link text-decoration-none text-dark"
+								type="submit" value="Đăng xuất" />
+						</form>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<table bgcolor="#6666FF" width="100%">
+		<tr>
+			<td>:))</td>
+		</tr>
+	</table>
+	<div class="container text-center">
+		<div>
+			<form th:action="@{/logout}" method="post">
+				<p>
+				<h1 class="redtext">
+					**<b>[[${#request.userPrincipal.principal.fullName}]]</b>**
+				</h1>
+
+				<p>
+					<font face="Courier New" color="green">-------------------------------------------</font>
+				</p>
+			</form>
+		</div>
+	</div>
+	<h1>Danh sách người dùng</h1>
+
+	<p>
+		<a class="btn btn_primary" href="/"><font size="4" color="blue">THÊM USER</font></a>
+	</p>
+	<div>
+		<div>
+			<table class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>User ID</th>
+						<th>Email</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user: ${listUsers}">
+						<td th:text="${user.id}">User ID</td>
+						<td th:text="${user.email}">Email</td>
+						<td th:text="${user.firstName}">First Name</td>
+						<td th:text="${user.lastName}">Last Name</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

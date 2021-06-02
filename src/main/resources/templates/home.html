@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+<style>
+.redtext {
+	color: Blue;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/list_users">Quản lý User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/ttuser">Thông tin User</a></li>
+					<li class="nav-item"><a class="nav-link" href="/todo">Todo</a></li>
+					<li class="nav-item">
+						<form th:action="@{/logout}" method="post">
+							<input class="btn btn-link text-decoration-none text-dark"
+								type="submit" value="Đăng xuất" />
+						</form>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<table bgcolor="rgb(128, 255, 128)" width="100%">
+		<tr>
+			<td>*-*</td>
+		</tr>
+	</table>
+	<div class="container text-center">
+		<div>
+			<form th:action="@{/logout}" method="post">
+				<p>
+				<h1 class="redtext">
+					Xin chào, <b>[[${#request.userPrincipal.principal.fullName}]]</b>!
+				</h1>
+				<p>
+					<font face="Courier New" color="red">**************************************************</font>
+				</p>
+			</form>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
